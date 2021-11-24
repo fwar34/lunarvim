@@ -52,7 +52,9 @@ lvim.keys.normal_mode["<leader>yc"] = "<cmd>Ydc<CR>"
 lvim.builtin.which_key.mappings["d"] = {
   name = "+GitGutter",
   n = {"<Plug>(GitGutterNextHunk)", "Next hunk"},
-  p = {"<Plug>(GitGutterPrevHunk)", "Prev hunk"}
+  p = {"<Plug>(GitGutterPrevHunk)", "Prev hunk"},
+  r = {"<Plug>(GitGutterUndoHunk)", "Undo hunk"},
+  u = {"<Plug>(GitGutterPreviewHunk)", "Preview hunk"},
 }
 
 -- misc commands
