@@ -33,6 +33,7 @@ lvim.keys.insert_mode["<C-d>"] = "<Del>"
 lvim.keys.normal_mode["<leader>rn"] = "<CMD>RnvimrToggle<CR>"
 lvim.keys.normal_mode["<leader>ud"] = "<CMD>GundoToggle<CR>"
 lvim.keys.normal_mode["<leader>do"] = "<CMD>on<CR>"
+lvim.keys.normal_mode["<leader>xq"] = "<CMD>copen<CR>"
 -- vim-signify
 lvim.keys.normal_mode["<leader>du"] = "<CMD>SignifyHunkDiff<CR>"
 lvim.keys.normal_mode["<leader>dr"] = "<CMD>SignifyHunkUndo<CR>"
