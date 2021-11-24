@@ -11,9 +11,9 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
--- lvim.colorscheme = "onedarker"
+lvim.colorscheme = "onedarker"
 -- lvim.colorscheme = "default"
-lvim.colorscheme = "onedark"
+-- lvim.colorscheme = "onedark"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -28,9 +28,15 @@ lvim.keys.insert_mode["<C-e>"] = "<Esc>A"
 lvim.keys.insert_mode["<C-d>"] = "<Del>"
 lvim.keys.normal_mode["<leader>rn"] = "<CMD>RnvimrToggle<CR>"
 lvim.keys.normal_mode["<leader>ud"] = "<CMD>GundoToggle<CR>"
+lvim.keys.normal_mode["<leader>do"] = "<CMD>on<CR>"
+-- vim-signify
+lvim.keys.normal_mode["<leader>du"] = "<CMD>SignifyHunkDiff<CR>"
+lvim.keys.normal_mode["<leader>dr"] = "<CMD>SignifyHunkUndo<CR>"
+lvim.keys.normal_mode["<leader>dn"] = "<plug>(signify-next-hunk)"
+lvim.keys.normal_mode["<leader>dp"] = "<Plug>(signify-prev-hunk)"
 
 -- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = ""
+lvim.keys.normal_mode["<leader>kb"] = "<cmd>BufferClose!<CR>"
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
@@ -224,7 +230,21 @@ lvim.plugins = {
     {'ludovicchabant/vim-gutentags', event = 'VimEnter *'},
     -- 提供 GscopeFind 命令并自动处理好 gtags 数据库切换
     -- 支持光标移动到符号名上：<leader>cg 查看定义，<leader>cs 查看引用
-    {'skywind3000/gutentags_plus', event = 'VimEnter *'},
+    {
+      'skywind3000/gutentags_plus', event = 'VimEnter *',
+      config = function()
+        -- and define your new maps:
+        vim.cmd [[ noremap <silent> <Leader>hs :GscopeFind s <C-R><C-W><cr> ]]
+        vim.cmd [[ noremap <silent> <Leader>hg :GscopeFind g <C-R><C-W><cr> ]]
+        vim.cmd [[ noremap <silent> <Leader>hc :GscopeFind c <C-R><C-W><cr> ]]
+        vim.cmd [[ noremap <silent> <Leader>ht :GscopeFind t <C-R><C-W><cr> ]]
+        vim.cmd [[ noremap <silent> <Leader>he :GscopeFind e <C-R><C-W><cr> ]]
+        vim.cmd [[ noremap <silent> <Leader>hf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr> ]]
+        vim.cmd [[ noremap <silent> <Leader>hi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr> ]]
+        vim.cmd [[ noremap <silent> <Leader>hd :GscopeFind d <C-R><C-W><cr> ]]
+        vim.cmd [[ noremap <silent> <Leader>ha :GscopeFind a <C-R><C-W><cr> ]]
+      end
+    },
   },
   {
     'skywind3000/asynctasks.vim', after = 'asyncrun.vim',
@@ -260,14 +280,19 @@ lvim.plugins = {
     'terryma/vim-expand-region',
     config = function()
       -- ALT_+/- 用于按分隔符扩大缩小 v 选区
-      vim.cmd [[ map <m-=> <Plug>(expand_region_expand) ]]
-      vim.cmd [[ map <m--> <Plug>(expand_region_shrink) ]]
+      vim.cmd [[ vnoremap <m-=> <Plug>(expand_region_expand) ]]
+      vim.cmd [[ vnoremap <m--> <Plug>(expand_region_shrink) ]]
     end
   },
-
+  {'tpope/vim-surround', event = 'VimEnter *'}
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
+lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=4 sw=4" },
--- }
+  -- 打开文件时恢复上一次光标所在位置
+	-- \ if line("'\"") > 1 && line("'\"") <= line("$") |
+	-- \	 exe "normal! g`\"" |
+	-- \ endif
+  -- {"BufReadPost", "*", ""},
+}
