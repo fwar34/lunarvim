@@ -40,6 +40,8 @@ lvim.keys.normal_mode["<M-e>"] = "<CMD>ChooseWin<CR>"
 -- vim.cmd [[ vnoremap <m--> <Plug>(expand_region_shrink) ]]
 lvim.keys.visual_mode["+"] = "<Plug>(expand_region_expand)"
 lvim.keys.visual_mode["-"] = "<Plug>(expand_region_shrink)"
+lvim.keys.normal_mode["<leader>yd"] = "<cmd>Yde<CR>"
+lvim.keys.normal_mode["<leader>yc"] = "<cmd>Ydc<CR>"
 -- vim-signify
 -- lvim.keys.normal_mode["<leader>du"] = "<CMD>SignifyHunkDiff<CR>"
 -- lvim.keys.normal_mode["<leader>dr"] = "<CMD>SignifyHunkUndo<CR>"
@@ -106,15 +108,15 @@ lvim.builtin.which_key.mappings["i"] = {
   r = {"<cmd>lua require('telescope.builtin').resume()<CR>", "Lists the results incl. multi-selections of the previous picker"},
 }
 
-lvim.builtin.which_key.mappings["t"] = {
-  name = "+Trouble",
-  r = { "<cmd>Trouble lsp_references<cr>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
-  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
-}
+-- lvim.builtin.which_key.mappings["t"] = {
+--   name = "+Trouble",
+--   r = { "<cmd>Trouble lsp_references<cr>", "References" },
+--   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+--   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+--   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+--   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+--   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+-- }
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
