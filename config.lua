@@ -34,14 +34,40 @@ lvim.keys.normal_mode["<leader>rn"] = "<CMD>RnvimrToggle<CR>"
 lvim.keys.normal_mode["<leader>ud"] = "<CMD>GundoToggle<CR>"
 lvim.keys.normal_mode["<leader>do"] = "<CMD>on<CR>"
 lvim.keys.normal_mode["<leader>xq"] = "<CMD>copen<CR>"
+lvim.keys.normal_mode["<leader>kb"] = "<cmd>BufferClose!<CR>"
+lvim.keys.normal_mode["<M-e>"] = "<CMD>ChooseWin<CR>"
+-- vim.cmd [[ vnoremap <m-=> <Plug>(expand_region_expand) ]]
+-- vim.cmd [[ vnoremap <m--> <Plug>(expand_region_shrink) ]]
+lvim.keys.visual_mode["+"] = "<Plug>(expand_region_expand)"
+lvim.keys.visual_mode["-"] = "<Plug>(expand_region_shrink)"
 -- vim-signify
-lvim.keys.normal_mode["<leader>du"] = "<CMD>SignifyHunkDiff<CR>"
-lvim.keys.normal_mode["<leader>dr"] = "<CMD>SignifyHunkUndo<CR>"
-lvim.keys.normal_mode["<leader>dn"] = "<plug>(signify-next-hunk)"
-lvim.keys.normal_mode["<leader>dp"] = "<Plug>(signify-prev-hunk)"
+-- lvim.keys.normal_mode["<leader>du"] = "<CMD>SignifyHunkDiff<CR>"
+-- lvim.keys.normal_mode["<leader>dr"] = "<CMD>SignifyHunkUndo<CR>"
+-- lvim.keys.normal_mode["<leader>dn"] = "<Plug>(signify-next-hunk)"
+-- lvim.keys.normal_mode["<leader>dp"] = "<Plug>(signify-prev-hunk)"
+
+-- <Plug> commands must in whick_key mappings
+lvim.builtin.which_key.mappings["d"] = {
+  name = "+GitGutter",
+  n = {"<Plug>(GitGutterNextHunk)", "Next hunk"},
+  p = {"<Plug>(GitGutterPrevHunk)", "Prev hunk"}
+}
+
+-- misc commands
+lvim.builtin.which_key.mappings["m"] = {
+  name = "+Misc",
+  w = {"<CMD>ChooseWin<CR>", "Choose window"},
+}
+
+-- visual commands
+lvim.builtin.which_key.mappings["v"] = {
+  name = "+Visual",
+  ["+"] = {"<Plug>(expand_region_expand)"},
+  ["-"] = {"<Plug>(expand_region_shrink)"},
+}
 
 -- unmap a default keymapping
-lvim.keys.normal_mode["<leader>kb"] = "<cmd>BufferClose!<CR>"
+-- lvim.keys.normal_mode["<M-e>"] = ""
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
@@ -241,7 +267,8 @@ lvim.plugins = {
   },
   {'easymotion/vim-easymotion'},
   {'lambdalisue/suda.vim'},
-  {'mhinz/vim-signify'},
+  -- {'mhinz/vim-signify'},
+  {'airblade/vim-gitgutter'},
   {'dstein64/vim-startuptime', cmd = 'StartupTime'},
   {'ryanoasis/vim-devicons', },
   {'sjl/gundo.vim', cmd = 'GundoToggle', config = 'vim.g.gundo_prefer_python3 = 1'},
@@ -292,7 +319,7 @@ lvim.plugins = {
     't9md/vim-choosewin',
     config = function()
       -- 使用 ALT+E 来选择窗口
-      vim.cmd [[ nmap <m-e> <Plug>(choosewin) ]]
+      -- vim.cmd [[ nmap <m-e> <Plug>(choosewin) ]]
     end
   },
   {
@@ -300,8 +327,8 @@ lvim.plugins = {
     'terryma/vim-expand-region',
     config = function()
       -- ALT_+/- 用于按分隔符扩大缩小 v 选区
-      vim.cmd [[ vnoremap <m-=> <Plug>(expand_region_expand) ]]
-      vim.cmd [[ vnoremap <m--> <Plug>(expand_region_shrink) ]]
+      -- vim.cmd [[ vnoremap <m-=> <Plug>(expand_region_expand) ]]
+      -- vim.cmd [[ vnoremap <m--> <Plug>(expand_region_shrink) ]]
     end
   },
   {'tpope/vim-surround', event = 'VimEnter *'}
