@@ -59,7 +59,18 @@ lvim.keys.normal_mode["<leader>kb"] = "<cmd>BufferClose!<CR>"
 -- }
 
 -- Use which-key to add extra bindings with the leader-key prefix
-lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+-- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+-- local _, builtin = pcall(require, "telescope.builtin")
+lvim.builtin.which_key.mappings["i"] = {
+  name = "+Telescope",
+  P = {"<cmd>Telescope projects<CR>", "Projects"},
+  p = {"<cmd>Telescope<CR>", "Telescope builtin pickers"},
+  s = {"<cmd>lua require('telescope.builtin').pickers()<CR>", "Telescope previous pickers"},
+  i = {"<cmd>lua require('telescope.builtin').current_buffer_tags()<CR>", "Current buffer tags"},
+  o = {"<cmd>lua require('telescope.builtin').vim_options()<CR>", "Vim options"},
+  b = {"<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", "Vim autocommands"},
+}
+
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -234,25 +245,25 @@ lvim.plugins = {
       'skywind3000/gutentags_plus', event = 'VimEnter *',
       config = function()
         -- and define your new maps:
-        vim.cmd [[ noremap <silent> <Leader>hs :GscopeFind s <C-R><C-W><cr> ]]
-        vim.cmd [[ noremap <silent> <Leader>hg :GscopeFind g <C-R><C-W><cr> ]]
-        vim.cmd [[ noremap <silent> <Leader>hc :GscopeFind c <C-R><C-W><cr> ]]
-        vim.cmd [[ noremap <silent> <Leader>ht :GscopeFind t <C-R><C-W><cr> ]]
-        vim.cmd [[ noremap <silent> <Leader>he :GscopeFind e <C-R><C-W><cr> ]]
-        vim.cmd [[ noremap <silent> <Leader>hf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr> ]]
-        vim.cmd [[ noremap <silent> <Leader>hi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr> ]]
-        vim.cmd [[ noremap <silent> <Leader>hd :GscopeFind d <C-R><C-W><cr> ]]
-        vim.cmd [[ noremap <silent> <Leader>ha :GscopeFind a <C-R><C-W><cr> ]]
+        -- vim.cmd [[ noremap <silent> <Leader>hs :GscopeFind s <C-R><C-W><cr> ]]
+        -- vim.cmd [[ noremap <silent> <Leader>hg :GscopeFind g <C-R><C-W><cr> ]]
+        -- vim.cmd [[ noremap <silent> <Leader>hc :GscopeFind c <C-R><C-W><cr> ]]
+        -- vim.cmd [[ noremap <silent> <Leader>ht :GscopeFind t <C-R><C-W><cr> ]]
+        -- vim.cmd [[ noremap <silent> <Leader>he :GscopeFind e <C-R><C-W><cr> ]]
+        -- vim.cmd [[ noremap <silent> <Leader>hf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr> ]]
+        -- vim.cmd [[ noremap <silent> <Leader>hi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr> ]]
+        -- vim.cmd [[ noremap <silent> <Leader>hd :GscopeFind d <C-R><C-W><cr> ]]
+        -- vim.cmd [[ noremap <silent> <Leader>ha :GscopeFind a <C-R><C-W><cr> ]]
       end
     },
   },
   {
-    'skywind3000/asynctasks.vim', after = 'asyncrun.vim',
-    requires = {'skywind3000/asyncrun.vim', event = 'VimEnter *'},
-    config = function()
-      -- 告诉 asyncrun 运行时自动打开高度为 6 的 quickfix 窗口，不然你看不到任何输出
-      vim.g.asyncrun_open = 6
-    end
+    'skywind3000/asynctasks.vim', -- after = 'asyncrun.vim',
+    -- requires = {'skywind3000/asyncrun.vim', event = 'VimEnter *'},
+    -- config = function()
+    --   -- 告诉 asyncrun 运行时自动打开高度为 6 的 quickfix 窗口，不然你看不到任何输出
+    --   vim.g.asyncrun_open = 6
+    -- end
   },
   {
     'wellle/targets.vim', event = 'VimEnter *',
