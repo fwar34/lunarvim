@@ -21,6 +21,10 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.insert_mode["<C-f>"] = "<Right>"
 lvim.keys.insert_mode["<C-b>"] = "<Left>"
+-- lvim.keys.command_mode["<C-f>"] = 'pumvisible() ? "\\<Right>" : "\\<C-f>"'
+-- lvim.keys.command_mode["<C-b>"] = 'pumvisible() ? "\\<Left>" : "\\<C-b>"'
+-- lvim.keys.command_mode["<C-f>"] = "<Right>"
+-- lvim.keys.command_mode["<C-b>"] = "<Left>"
 lvim.keys.insert_mode["<C-j>"] = "<Down>"
 lvim.keys.insert_mode["<C-k>"] = "<Up>"
 lvim.keys.insert_mode["<C-a>"] = "<Esc>I"
@@ -65,10 +69,14 @@ lvim.builtin.which_key.mappings["i"] = {
   name = "+Telescope",
   P = {"<cmd>Telescope projects<CR>", "Projects"},
   p = {"<cmd>Telescope<CR>", "Telescope builtin pickers"},
+  w = {"<cmd>Telescope grep_string<CR>", "Grep string under cursor"},
+  W = {"<cmd>lua require('telescope.builtin').grep_string()<CR>", "Grep string under cursor"},
   s = {"<cmd>lua require('telescope.builtin').pickers()<CR>", "Telescope previous pickers"},
   i = {"<cmd>lua require('telescope.builtin').current_buffer_tags()<CR>", "Current buffer tags"},
   o = {"<cmd>lua require('telescope.builtin').vim_options()<CR>", "Vim options"},
-  b = {"<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", "Vim autocommands"},
+  b = {"<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", "Fuzzy search in current buffer"},
+  q = {"<cmd>lua require('telescope.builtin').quickfix()<CR>", "List items in quickfix"},
+  r = {"<cmd>lua require('telescope.builtin').resume()<CR>", "Lists the results incl. multi-selections of the previous picker"},
 }
 
 lvim.builtin.which_key.mappings["t"] = {
