@@ -12,9 +12,11 @@ an executable
 lvim.log.level = "warn"
 lvim.format_on_save = true
 -- lvim.colorscheme = "onedarker"
-lvim.colorscheme = "oceanic_material"
+-- lvim.colorscheme = "oceanic_material"
+-- lvim.colorscheme = "zephyr"
+-- lvim.colorscheme = "doom-one"
 -- lvim.colorscheme = "default"
--- lvim.colorscheme = "onedark"
+lvim.colorscheme = "onedark"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -117,6 +119,15 @@ lvim.builtin.which_key.mappings["i"] = {
   q = {"<cmd>lua require('telescope.builtin').quickfix()<CR>", "List items in quickfix"},
   r = {"<cmd>lua require('telescope.builtin').resume()<CR>", "Lists the results incl. multi-selections of the previous picker"},
 }
+
+-- lvim.builtin.which_key.mappings[" "] = { "<Plug>(easymotion-prefix)", "easymotion-prefix" }
+lvim.builtin.which_key.mappings[" "] = {
+  name = "+vim-easymotion",
+  s = {"<Plug>(easymotion-s2)", "easymotion-s2"},
+  -- w = {"<Plug>(easymotion-w)", "easymotion-w"},
+  -- W = {"<Plug>(easymotion-W)", "easymotion-W"},
+}
+
 
 -- lvim.builtin.which_key.mappings["t"] = {
 --   name = "+Trouble",
@@ -243,10 +254,17 @@ lvim.plugins = {
     --   end
     -- end
   -- },
-  {
-    "joshdick/onedark.vim",
-  },
-  {'glepnir/oceanic-material'},
+
+  -- themes
+	{
+		{
+			"joshdick/onedark.vim",
+		},
+		{'glepnir/oceanic-material'},
+		{'abzcoding/zephyr-nvim'},
+		{"rose-pine/neovim"},
+	},
+
   {
     'kevinhwang91/rnvimr', cmd = 'RnvimrToggle',
     config = function()
@@ -344,11 +362,11 @@ lvim.plugins = {
     end
   },
   {'tpope/vim-surround', event = 'VimEnter *'},
-  {
-    'norcalli/nvim-colorizer.lua', config = function ()
-      require'colorizer'.setup()
-    end
-  },
+  -- {
+  --   'norcalli/nvim-colorizer.lua', config = function ()
+  --     require'colorizer'.setup()
+  --   end
+  -- },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
