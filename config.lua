@@ -439,6 +439,14 @@ lvim.plugins = {
         'liuchengxu/vista.vim'
     },
     {
+        'ojroques/vim-scrollstatus',
+        config = function()
+            vim.g.scrollstatus_size = 12
+            vim.g.scrollstatus_symbol_track = '-'
+            vim.g.scrollstatus_symbol_bar = '#'
+        end
+    },
+    {
         'itchyny/lightline.vim',
         config = function ()
             vim.cmd [[
