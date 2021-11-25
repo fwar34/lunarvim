@@ -50,10 +50,11 @@ lvim.keys.normal_mode["<leader>kb"] = "<cmd>BufferClose!<CR>"
 lvim.keys.normal_mode["<M-e>"] = "<CMD>ChooseWin<CR>"
 -- vim.cmd [[ vnoremap <m-=> <Plug>(expand_region_expand) ]]
 -- vim.cmd [[ vnoremap <m--> <Plug>(expand_region_shrink) ]]
-lvim.keys.visual_mode["+"] = "<Plug>(expand_region_expand)"
-lvim.keys.visual_mode["-"] = "<Plug>(expand_region_shrink)"
 lvim.keys.normal_mode["<leader>yd"] = "<cmd>Yde<CR>"
 lvim.keys.normal_mode["<leader>yc"] = "<cmd>Ydc<CR>"
+lvim.keys.normal_mode["<leader>ia"] = "mgA;<Esc>`gmg"
+lvim.keys.normal_mode["ge"] = "G"
+
 -- vim-signify
 -- lvim.keys.normal_mode["<leader>du"] = "<CMD>SignifyHunkDiff<CR>"
 -- lvim.keys.normal_mode["<leader>dr"] = "<CMD>SignifyHunkUndo<CR>"
@@ -82,14 +83,15 @@ lvim.builtin.which_key.mappings.b.o = {"<CMD>FSHere<CR>", "FSHere"}
 lvim.builtin.which_key.mappings["m"] = {
     name = "+Misc",
     w = {"<CMD>ChooseWin<CR>", "Choose window"},
-    m = {"<CMD>MinimapToggle<CR>", "MinimapToggle"},
+    t = {"<CMD>MinimapToggle<CR>", "MinimapToggle"},
+    m = {"%", "%"},
 }
 
 -- visual commands
-lvim.builtin.which_key.mappings["v"] = {
+lvim.builtin.which_key.vmappings = {
     name = "+Visual",
-    ["+"] = {"<Plug>(expand_region_expand)"},
-    ["-"] = {"<Plug>(expand_region_shrink)"},
+    ["+"] = {"<Plug>(expand_region_expand)", "expand region"},
+    ["-"] = {"<Plug>(expand_region_shrink)", "shrink region"},
 }
 
 -- unmap a default keymapping
@@ -132,7 +134,10 @@ lvim.builtin.which_key.mappings["i"] = {
     r = {"<cmd>lua require('telescope.builtin').resume()<CR>", "Lists the results incl. multi-selections of the previous picker"},
 }
 
-lvim.builtin.which_key.mappings.v.s = {"<CMD>Vista!!<CR>", "Vista toggle"}
+-- lvim.builtin.which_key.mappings.v.s = {"<CMD>Vista!!<CR>", "Vista toggle"}
+lvim.builtin.which_key.mappings["v"] = {
+  s = {"<CMD>Vista!!<CR>", "Vista toggle"}
+}
 
 -- lvim.builtin.which_key.mappings[" "] = { "<Plug>(easymotion-prefix)", "easymotion-prefix" }
 lvim.builtin.which_key.mappings[" "] = {
