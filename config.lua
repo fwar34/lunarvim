@@ -435,6 +435,30 @@ lvim.plugins = {
   },
   {
     'liuchengxu/vista.vim'
+  },
+  {
+    'itchyny/lightline.vim',
+    config = function ()
+			vim.cmd [[
+			let g:lightline = {
+			\ 'colorscheme': 'wombat',
+			\ 'component': {'charvaluehex': '0x%B'},
+			\ 'active':
+			\    {'left': [ [ 'mode', 'paste' ],
+			\               [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ],
+			\     'right': [ [ 'lineinfo' ],
+			\                [  'charvaluehex', 'scorestatus', 'fileformat', 'fileencoding', 'filetype' ] ]
+			\    },
+			\ 'component_function':
+			\    {
+			\     'gitbranch': 'FugitiveStatusline',
+			\     'scorestatus': 'ScrollStatus',
+			\    },
+			\ }
+			]]
+
+
+    end
   }
 }
 
