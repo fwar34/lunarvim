@@ -116,7 +116,7 @@ lvim.builtin.which_key.mappings["v"] = {
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 -- local _, builtin = pcall(require, "telescope.builtin")
-lvim.builtin.which_key.mappings["t"] = {
+lvim.builtin.which_key.mappings["i"] = {
   name = "+Telescope+Vista",
   P = {"<cmd>Telescope projects<CR>", "Projects"},
   p = {"<cmd>Telescope<CR>", "Telescope builtin pickers"},
@@ -439,6 +439,17 @@ lvim.plugins = {
   {
     'itchyny/lightline.vim',
     config = function ()
+      vim.cmd [[
+      function! NearestMethodOrFunction() abort
+        return get(b:, 'vista_nearest_method_or_function', '')
+      endfunction
+      ]]
+      -- By default vista.vim never run if you don't call it explicitly.
+      -- If you want to show the nearest function in your statusline automatically,
+      -- you can add the following line to your vimrc
+      vim.cmd [[ autocmd VimEnter * call vista#RunForNearestMethodOrFunction() ]]
+
+      -- sy#repo#get_stats_decorated function belong to vim-signify
 			vim.cmd [[
 			let g:lightline = {
 			\ 'colorscheme': 'wombat',
@@ -450,25 +461,24 @@ lvim.plugins = {
 			\                [  'charvaluehex', 'scorestatus', 'fileformat', 'fileencoding', 'filetype' ] ]
 			\    },
 			\ 'component_function':
-			\    {
-        \   'gitstatus': 'sy#repo#get_stats_decorated',
-			\     'gitbranch': 'FugitiveStatusline',
-			\     'scorestatus': 'ScrollStatus',
-			\    },
-			\ }
-			]]
-
-
+      \    {
+      \     'method': 'NearestMethodOrFunction',
+      \     'gitstatus': 'sy#repo#get_stats_decorated',
+      \     'gitbranch': 'FugitiveStatusline',
+      \     'scorestatus': 'ScrollStatus',
+      \    },
+      \ }
+      ]]
     end
   }
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=4 sw=4" },
+  --   { "BufWinEnter", "*.lua", "setlocal ts=4 sw=4" },
   -- 打开文件时恢复上一次光标所在位置
-	-- \ if line("'\"") > 1 && line("'\"") <= line("$") |
-	-- \	 exe "normal! g`\"" |
-	-- \ endif
+  -- \ if line("'\"") > 1 && line("'\"") <= line("$") |
+  -- \	 exe "normal! g`\"" |
+  -- \ endif
   -- {"BufReadPost", "*", ""},
 }
