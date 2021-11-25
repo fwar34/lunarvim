@@ -8,6 +8,8 @@ an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
+require("options")
+
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
@@ -470,15 +472,11 @@ lvim.plugins = {
       \ }
       ]]
     end
-  }
+  },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 lvim.autocommands.custom_groups = {
   --   { "BufWinEnter", "*.lua", "setlocal ts=4 sw=4" },
-  -- 打开文件时恢复上一次光标所在位置
-  -- \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  -- \	 exe "normal! g`\"" |
-  -- \ endif
   -- {"BufReadPost", "*", ""},
 }
