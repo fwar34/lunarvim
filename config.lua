@@ -74,6 +74,8 @@ lvim.builtin.which_key.mappings["d"] = {
   u = {"<CMD>SignifyHunkDiff<CR>", "Preview hunk"},
 }
 
+lvim.builtin.which_key.mappings.b.o = {"<CMD>FSHere<CR>", "FSHere"}
+
 -- misc commands
 lvim.builtin.which_key.mappings["m"] = {
   name = "+Misc",
@@ -114,8 +116,8 @@ lvim.builtin.which_key.mappings["v"] = {
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 -- local _, builtin = pcall(require, "telescope.builtin")
-lvim.builtin.which_key.mappings["i"] = {
-  name = "+Telescope",
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Telescope+Vista",
   P = {"<cmd>Telescope projects<CR>", "Projects"},
   p = {"<cmd>Telescope<CR>", "Telescope builtin pickers"},
   w = {"<cmd>Telescope grep_string<CR>", "Grep string under cursor"},
@@ -127,6 +129,8 @@ lvim.builtin.which_key.mappings["i"] = {
   q = {"<cmd>lua require('telescope.builtin').quickfix()<CR>", "List items in quickfix"},
   r = {"<cmd>lua require('telescope.builtin').resume()<CR>", "Lists the results incl. multi-selections of the previous picker"},
 }
+
+lvim.builtin.which_key.mappings.v.s = {"<CMD>Vista!!<CR>", "Vista toggle"}
 
 -- lvim.builtin.which_key.mappings[" "] = { "<Plug>(easymotion-prefix)", "easymotion-prefix" }
 lvim.builtin.which_key.mappings[" "] = {
@@ -415,6 +419,22 @@ lvim.plugins = {
       -- vim.cmd [[ hi MinimapCurrentLine ctermfg=Red guifg=#df0000 guibg=#32302f]]
       vim.g.minimap_cursor_color = 'MinimapCurrentLine'
     end
+  },
+  {
+    'vim-ctrlspace/vim-ctrlspace',
+    config = function ()
+      vim.cmd [[ set nocompatible ]]
+      vim.cmd [[ set hidden ]]
+      vim.cmd [[ set encoding=utf-8 ]]
+      vim.g.CtrlSpaceDefaultMappingKey = "<C-;> "
+      vim.cmd [[ nnoremap <silent><C-p> :CtrlSpace O<CR> ]]
+      vim.g.CtrlSpaceLoadLastWorkspaceOnStart = 1
+      vim.g.CtrlSpaceSaveWorkspaceOnSwitch = 1
+      vim.g.CtrlSpaceSaveWorkspaceOnExit = 1
+    end
+  },
+  {
+    'liuchengxu/vista.vim'
   }
 }
 
