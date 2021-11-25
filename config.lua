@@ -116,23 +116,29 @@ lvim.builtin.which_key.vmappings = {
 --     ["<C-k>"] = actions.move_selection_previous,
 --   },
 -- }
- function Rg_options()
+
+function Rg_options()
     -- return { "--glob !tags", "--glob !nvim/snippets/**", }
     return {
-        "--glob",
+        "--iglob",
         "!tags",
+        -- "--iglob",
+        -- "!*.vim",
     }
 end
+lvim.builtin.which_key.mappings.s.t = {'<CMD>lua require("telescope.builtin").live_grep({additional_args = Rg_options})<CR>', "Live grep"}
+-- lvim.builtin.which_key.mappings.s.t["1"] = "<cmd>Telescope live_grep<cr>"
+-- lvim.builtin.which_key.mappings.s.t["2"] = "Text"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- local _, builtin = pcall(require, "telescope.builtin")
+-- local _, builtin = pcall(require, "telescope.builtin") leader
 lvim.builtin.which_key.mappings["i"] = {
     name = "+Telescope+Vista",
     P = {"<cmd>Telescope projects<CR>", "Projects"},
     p = {"<cmd>Telescope<CR>", "Telescope builtin pickers"},
-    w = {"<cmd>Telescope grep_string<CR>", "Grep string under cursor"},
-    W = {'<cmd>lua require("telescope.builtin").grep_string({additional_args = Rg_options})<CR>', "Grep string under cursor"},
+    -- w = {"<cmd>Telescope grep_string<CR>", "Grep string under cursor"},
+    w = {'<cmd>lua require("telescope.builtin").grep_string({additional_args = Rg_options})<CR>', "Grep string under cursor"},
     s = {"<cmd>lua require('telescope.builtin').pickers()<CR>", "Telescope previous pickers"},
     i = {"<cmd>lua require('telescope.builtin').current_buffer_tags()<CR>", "Current buffer tags"},
     o = {"<cmd>lua require('telescope.builtin').vim_options()<CR>", "Vim options"},
