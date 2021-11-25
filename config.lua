@@ -445,12 +445,13 @@ lvim.plugins = {
 			\ 'component': {'charvaluehex': '0x%B'},
 			\ 'active':
 			\    {'left': [ [ 'mode', 'paste' ],
-			\               [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ],
+			\               [ 'gitbranch', 'gitstatus', 'readonly', 'filename', 'modified', 'method' ] ],
 			\     'right': [ [ 'lineinfo' ],
 			\                [  'charvaluehex', 'scorestatus', 'fileformat', 'fileencoding', 'filetype' ] ]
 			\    },
 			\ 'component_function':
 			\    {
+        \   'gitstatus': 'sy#repo#get_stats_decorated',
 			\     'gitbranch': 'FugitiveStatusline',
 			\     'scorestatus': 'ScrollStatus',
 			\    },
