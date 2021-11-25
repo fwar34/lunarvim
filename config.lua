@@ -17,6 +17,13 @@ lvim.format_on_save = true
 -- lvim.colorscheme = "doom-one"
 -- lvim.colorscheme = "default"
 lvim.colorscheme = "onedark"
+-- lvim.colorscheme = "github_dimmed"
+-- lvim.colorscheme = "github_dark"
+-- lvim.colorscheme = "nord"
+-- lvim.colorscheme = "one-nvim"
+-- lvim.colorscheme = "duskfox"
+-- lvim.colorscheme = "gruvbox-flat"
+
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -71,6 +78,7 @@ lvim.builtin.which_key.mappings["d"] = {
 lvim.builtin.which_key.mappings["m"] = {
   name = "+Misc",
   w = {"<CMD>ChooseWin<CR>", "Choose window"},
+  m = {"<CMD>MinimapToggle<CR>", "MinimapToggle"},
 }
 
 -- visual commands
@@ -264,6 +272,31 @@ lvim.plugins = {
 		{'glepnir/oceanic-material'},
 		{'abzcoding/zephyr-nvim'},
 		{"rose-pine/neovim"},
+    {
+      "projekt0n/github-nvim-theme", config = function()
+        -- require('github-theme').setup()
+      end
+    },
+    {
+      'shaunsingh/nord.nvim'
+    },
+    {
+      'tanvirtin/monokai.nvim',
+      config = function ()
+        -- require('monokai').setup {}
+        -- require('monokai').setup { palette = require('monokai').pro }
+        -- require('monokai').setup { palette = require('monokai').soda }
+      end
+    },
+    {
+      'Th3Whit3Wolf/one-nvim',
+    },
+    {
+      'EdenEast/nightfox.nvim',
+    },
+    {
+      'eddyekofo94/gruvbox-flat.nvim'
+    }
 	},
 
   {
@@ -363,11 +396,26 @@ lvim.plugins = {
     end
   },
   {'tpope/vim-surround', event = 'VimEnter *'},
-  -- {
-  --   'norcalli/nvim-colorizer.lua', config = function ()
-  --     require'colorizer'.setup()
-  --   end
-  -- },
+  {
+    'norcalli/nvim-colorizer.lua', config = function ()
+      require'colorizer'.setup()
+    end
+  },
+  {
+    'wfxr/minimap.vim',
+    run = ':!cargo install --locked code-minimap',
+    config = function ()
+      vim.g.minimap_width = 10
+      -- vim.g.minimap_auto_start = 1
+      -- vim.g.minimap_auto_start_win_enter = 1
+
+      -- https://github.com/wfxr/minimap.vim
+      -- I don't like the default highlight group, how to change it?
+      vim.cmd [[ hi MinimapCurrentLine ctermfg=Green guifg=#50FA7B guibg=#32302f]]
+      -- vim.cmd [[ hi MinimapCurrentLine ctermfg=Red guifg=#df0000 guibg=#32302f]]
+      vim.g.minimap_cursor_color = 'MinimapCurrentLine'
+    end
+  }
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
