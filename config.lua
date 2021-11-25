@@ -116,6 +116,13 @@ lvim.builtin.which_key.vmappings = {
 --     ["<C-k>"] = actions.move_selection_previous,
 --   },
 -- }
+ function Rg_options()
+    -- return { "--glob !tags", "--glob !nvim/snippets/**", }
+    return {
+        "--glob",
+        "!tags",
+    }
+end
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
@@ -125,7 +132,7 @@ lvim.builtin.which_key.mappings["i"] = {
     P = {"<cmd>Telescope projects<CR>", "Projects"},
     p = {"<cmd>Telescope<CR>", "Telescope builtin pickers"},
     w = {"<cmd>Telescope grep_string<CR>", "Grep string under cursor"},
-    W = {"<cmd>lua require('telescope.builtin').grep_string()<CR>", "Grep string under cursor"},
+    W = {'<cmd>lua require("telescope.builtin").grep_string({additional_args = Rg_options})<CR>', "Grep string under cursor"},
     s = {"<cmd>lua require('telescope.builtin').pickers()<CR>", "Telescope previous pickers"},
     i = {"<cmd>lua require('telescope.builtin').current_buffer_tags()<CR>", "Current buffer tags"},
     o = {"<cmd>lua require('telescope.builtin').vim_options()<CR>", "Vim options"},
