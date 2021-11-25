@@ -11,7 +11,8 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "onedarker"
+-- lvim.colorscheme = "onedarker"
+lvim.colorscheme = "oceanic_material"
 -- lvim.colorscheme = "default"
 -- lvim.colorscheme = "onedark"
 
@@ -49,12 +50,19 @@ lvim.keys.normal_mode["<leader>yc"] = "<cmd>Ydc<CR>"
 -- lvim.keys.normal_mode["<leader>dp"] = "<Plug>(signify-prev-hunk)"
 
 -- <Plug> commands must in whick_key mappings
+-- lvim.builtin.which_key.mappings["d"] = {
+--   name = "+GitGutter",
+--   n = {"<Plug>(GitGutterNextHunk)", "Next hunk"},
+--   p = {"<Plug>(GitGutterPrevHunk)", "Prev hunk"},
+--   r = {"<Plug>(GitGutterUndoHunk)", "Undo hunk"},
+--   u = {"<Plug>(GitGutterPreviewHunk)", "Preview hunk"},
+-- }
 lvim.builtin.which_key.mappings["d"] = {
-  name = "+GitGutter",
-  n = {"<Plug>(GitGutterNextHunk)", "Next hunk"},
-  p = {"<Plug>(GitGutterPrevHunk)", "Prev hunk"},
-  r = {"<Plug>(GitGutterUndoHunk)", "Undo hunk"},
-  u = {"<Plug>(GitGutterPreviewHunk)", "Preview hunk"},
+  name = "+vim-signify",
+  n = {"<Plug>(signify-next-hunk)", "Next hunk"},
+  p = {"<Plug>(signify-prev-hunk)", "Prev hunk"},
+  r = {"<CMD>SignifyHunkUndo<CR>", "Undo hunk"},
+  u = {"<CMD>SignifyHunkDiff<CR>", "Preview hunk"},
 }
 
 -- misc commands
@@ -271,8 +279,8 @@ lvim.plugins = {
   },
   {'easymotion/vim-easymotion'},
   {'lambdalisue/suda.vim'},
-  -- {'mhinz/vim-signify'},
-  {'airblade/vim-gitgutter'},
+  {'mhinz/vim-signify'},
+  -- {'airblade/vim-gitgutter'}, -- 不支持 svn
   {'dstein64/vim-startuptime', cmd = 'StartupTime'},
   {'ryanoasis/vim-devicons', },
   {'sjl/gundo.vim', cmd = 'GundoToggle', config = 'vim.g.gundo_prefer_python3 = 1'},
@@ -335,7 +343,12 @@ lvim.plugins = {
       -- vim.cmd [[ vnoremap <m--> <Plug>(expand_region_shrink) ]]
     end
   },
-  {'tpope/vim-surround', event = 'VimEnter *'}
+  {'tpope/vim-surround', event = 'VimEnter *'},
+  {
+    'norcalli/nvim-colorizer.lua', config = function ()
+      require'colorizer'.setup()
+    end
+  },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
