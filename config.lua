@@ -124,6 +124,7 @@ lvim.builtin.which_key.mappings["i"] = {
 lvim.builtin.which_key.mappings[" "] = {
   name = "+vim-easymotion",
   s = {"<Plug>(easymotion-s2)", "easymotion-s2"},
+  ["."] = {"<Plug>(easymotion-repeat)", "easymotion-repeat"}
   -- w = {"<Plug>(easymotion-w)", "easymotion-w"},
   -- W = {"<Plug>(easymotion-W)", "easymotion-W"},
 }
