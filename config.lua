@@ -122,8 +122,8 @@ function Rg_options()
     return {
         "--iglob",
         "!tags",
-        -- "--iglob",
-        -- "!*.vim",
+        "--iglob",
+        "!*.svn/*",
     }
 end
 lvim.builtin.which_key.mappings.s.t = {'<CMD>lua require("telescope.builtin").live_grep({additional_args = Rg_options})<CR>', "Live grep"}
@@ -146,6 +146,8 @@ lvim.builtin.which_key.mappings["i"] = {
     q = {"<cmd>lua require('telescope.builtin').quickfix()<CR>", "List items in quickfix"},
     r = {"<cmd>lua require('telescope.builtin').resume()<CR>", "Lists the results incl. multi-selections of the previous picker"},
 }
+
+lvim.builtin.which_key.mappings.m.s = {"<Plug>(wildfire-quick-select)", "wildfire quick selection"}
 
 -- lvim.builtin.which_key.mappings.v.s = {"<CMD>Vista!!<CR>", "Vista toggle"}
 lvim.builtin.which_key.mappings["v"] = {
@@ -499,6 +501,14 @@ lvim.plugins = {
             ]]
         end
     },
+    -- {
+    --     'machakann/vim-sandwich',
+    --     config = function ()
+    --     end
+    -- },
+    {
+        'gcmt/wildfire.vim'
+    }
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
