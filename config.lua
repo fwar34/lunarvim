@@ -45,7 +45,7 @@ lvim.keys.insert_mode["<C-d>"] = "<Del>"
 lvim.keys.normal_mode["<leader>rn"] = "<CMD>RnvimrToggle<CR>"
 lvim.keys.normal_mode["<leader>ud"] = "<CMD>GundoToggle<CR>"
 lvim.keys.normal_mode["<leader>do"] = "<CMD>on<CR>"
-lvim.keys.normal_mode["<leader>xq"] = "<CMD>copen<CR>"
+-- lvim.keys.normal_mode["<leader>xq"] = "<CMD>copen<CR>"
 lvim.keys.normal_mode["<leader>kb"] = "<cmd>BufferClose!<CR>"
 lvim.keys.normal_mode["<M-e>"] = "<CMD>ChooseWin<CR>"
 -- vim.cmd [[ vnoremap <m-=> <Plug>(expand_region_expand) ]]
@@ -77,7 +77,7 @@ lvim.builtin.which_key.mappings["d"] = {
     u = {"<CMD>SignifyHunkDiff<CR>", "Preview hunk"},
 }
 
-lvim.builtin.which_key.mappings.b.o = {"<CMD>FSHere<CR>", "FSHere"}
+-- lvim.builtin.which_key.mappings.b.o = {"<CMD>FSHere<CR>", "FSHere"}
 
 -- misc commands
 lvim.builtin.which_key.mappings["m"] = {
@@ -85,6 +85,7 @@ lvim.builtin.which_key.mappings["m"] = {
     w = {"<CMD>ChooseWin<CR>", "Choose window"},
     t = {"<CMD>MinimapToggle<CR>", "MinimapToggle"},
     m = {"%", "%"},
+    s = {"", ""}
 }
 
 -- visual commands
@@ -98,6 +99,32 @@ lvim.builtin.which_key.vmappings = {
 -- lvim.keys.normal_mode["<M-e>"] = ""
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
+
+function Rg_options()
+    -- return { "--glob !tags", "--glob !nvim/snippets/**", }
+    return {
+        "--iglob",
+        "!tags",
+        "--iglob",
+        "!*.lo",
+        "--iglob",
+        "!*.makefile",
+        "--iglob",
+        "!*.html",
+        "--iglob",
+        "!*.svn/*",
+        "--iglob",
+        "!*.git/*",
+    }
+end
+
+lvim.builtin.which_key.mappings["f"] = {
+    a = {'<CMD>lua require("telescope.builtin").live_grep({additional_args = Rg_options})<CR>', "Live grep"},
+    f = {'<CMD>Telescope find_files find_command=rg,--ignore,--hidden,--files,--iglob,!*.svn,--iglob,!*.git<CR>', "telescope find_files"},
+    w = {'<cmd>lua require("telescope.builtin").grep_string({additional_args = Rg_options})<CR>', "Grep string under cursor"},
+    o = {"<CMD>FSHere<CR>", "FSHere"},
+    p = {"<cmd>Telescope projects<CR>", "Projects"},
+}
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -116,16 +143,6 @@ lvim.builtin.which_key.vmappings = {
 --     ["<C-k>"] = actions.move_selection_previous,
 --   },
 -- }
-
-function Rg_options()
-    -- return { "--glob !tags", "--glob !nvim/snippets/**", }
-    return {
-        "--iglob",
-        "!tags",
-        "--iglob",
-        "!*.svn/*",
-    }
-end
 lvim.builtin.which_key.mappings.s.t = {'<CMD>lua require("telescope.builtin").live_grep({additional_args = Rg_options})<CR>', "Live grep"}
 -- lvim.builtin.which_key.mappings.s.t["1"] = "<cmd>Telescope live_grep<cr>"
 -- lvim.builtin.which_key.mappings.s.t["2"] = "Text"
@@ -135,10 +152,10 @@ lvim.builtin.which_key.mappings.s.t = {'<CMD>lua require("telescope.builtin").li
 -- local _, builtin = pcall(require, "telescope.builtin") leader
 lvim.builtin.which_key.mappings["i"] = {
     name = "+Telescope+Vista",
-    P = {"<cmd>Telescope projects<CR>", "Projects"},
+    -- P = {"<cmd>Telescope projects<CR>", "Projects"},
     p = {"<cmd>Telescope<CR>", "Telescope builtin pickers"},
     -- w = {"<cmd>Telescope grep_string<CR>", "Grep string under cursor"},
-    w = {'<cmd>lua require("telescope.builtin").grep_string({additional_args = Rg_options})<CR>', "Grep string under cursor"},
+    -- w = {'<cmd>lua require("telescope.builtin").grep_string({additional_args = Rg_options})<CR>', "Grep string under cursor"},
     s = {"<cmd>lua require('telescope.builtin').pickers()<CR>", "Telescope previous pickers"},
     i = {"<cmd>lua require('telescope.builtin').current_buffer_tags()<CR>", "Current buffer tags"},
     o = {"<cmd>lua require('telescope.builtin').vim_options()<CR>", "Vim options"},
@@ -146,6 +163,22 @@ lvim.builtin.which_key.mappings["i"] = {
     q = {"<cmd>lua require('telescope.builtin').quickfix()<CR>", "List items in quickfix"},
     r = {"<cmd>lua require('telescope.builtin').resume()<CR>", "Lists the results incl. multi-selections of the previous picker"},
 }
+
+lvim.builtin.which_key.mappings["q"] = {
+    q = {"<CMD>q<CR>", "Quite"},
+    f = {"<CMD>copen<CR>", "Open quickfix"},
+}
+
+lvim.builtin.which_key.mappings["w"] = {
+    -- w = {},
+    i = {"<CMD>ChooseWin<CR>", "ChooseWin"},
+}
+
+lvim.builtin.which_key.mappings["z"] = {
+    z = {"<CMD>w<CR>", "Write"},
+}
+
+lvim.builtin.which_key.mappings.l.i = {"<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", "Fuzzy search in current buffer"}
 
 lvim.builtin.which_key.mappings.m.s = {"<Plug>(wildfire-quick-select)", "wildfire quick selection"}
 
