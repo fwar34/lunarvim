@@ -55,6 +55,7 @@ lvim.keys.normal_mode["<leader>yd"] = "<cmd>Yde<CR>"
 lvim.keys.normal_mode["<leader>yc"] = "<cmd>Ydc<CR>"
 lvim.keys.normal_mode["<leader>ia"] = "mgA;<Esc>`gmg"
 lvim.keys.normal_mode["ge"] = "G"
+lvim.keys.normal_mode["<leader><TAB>"] = "<C-w><C-w>"
 
 -- vim-signify
 -- lvim.keys.normal_mode["<leader>du"] = "<CMD>SignifyHunkDiff<CR>"
